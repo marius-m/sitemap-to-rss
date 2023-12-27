@@ -5,6 +5,7 @@ import lt.markmerkk.DateTimeUtils
 import nl.adaptivity.xmlutil.serialization.XmlNamespaceDeclSpec
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
+import java.net.URI
 import java.time.OffsetDateTime
 
 class Rss {
@@ -29,7 +30,32 @@ class Rss {
 
     @Serializable
     @XmlSerialName("title")
-    data class Title(@XmlValue val content: String)
+    data class Title(@XmlValue val content: String) {
+        companion object {
+
+            @Throws(IllegalArgumentException::class)
+            fun fromLink(link: String): Title {
+                val linkSanitized = link
+                    .trim()
+                    .replace("\n", "")
+                val uri = URI.create(linkSanitized)
+                val pathSegments = uri
+                    .path
+                    .split("/")
+                    .rmEmpty()
+                val lastSegment = pathSegments
+                    .lastOrNull() ?: throw IllegalArgumentException("Invalid link: $link")
+                val titleSanitized = lastSegment
+                    .replace("-", " ")
+                return Title(titleSanitized)
+            }
+
+            private fun List<String>.rmEmpty(): List<String> {
+                return this
+                    .filter { it.isNotEmpty() }
+            }
+        }
+    }
 
     @Serializable
     @XmlSerialName("link")
@@ -37,7 +63,13 @@ class Rss {
 
     @Serializable
     @XmlSerialName("description")
-    data class Description(@XmlValue val content: String)
+    data class Description(@XmlValue val content: String) {
+        companion object {
+            fun asEmpty(): Description {
+                return Description("")
+            }
+        }
+    }
 
     @Serializable
     @XmlSerialName("pubDate")

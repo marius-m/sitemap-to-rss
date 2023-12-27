@@ -44,4 +44,35 @@ class RssSerializeTest {
             .trimIndent()
         assertThat(result).isEqualTo(expectNoWhiteSpace)
     }
+
+    @Test
+    fun test1_valid() {
+        val now = TimeProviderTest.now()
+        val link1 = "https://www.finansaipaprastai.lt/post/investavimas-i-akcijas"
+        val customXmlStr = Rss.Rss(
+            channel = Rss.Channel(
+                title = Rss.Title("Title1"),
+                link = Rss.Link("https://www.finansaipaprastai.lt/"),
+                description = Rss.Description.asEmpty(),
+                pubDate = Rss.PubDate.fromDT(now),
+                item = listOf(
+                    Rss.Item(
+                        title = Rss.Title.fromLink(link1),
+                        link = Rss.Link(link1),
+                        guid = Rss.Guid(link1),
+                        description = Rss.Description.asEmpty(),
+                        pubDate = Rss.PubDate.fromDT(now),
+                    ),
+                ),
+            )
+        )
+
+        val result = XML.encodeToString(Rss.Rss.serializer(), customXmlStr)
+
+        val expectNoWhiteSpace =
+            """
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Title1</title><link>https://www.finansaipaprastai.lt/</link><description></description><pubDate>Thu, 1 Jan 1970 00:00:00 GMT</pubDate><item><title>investavimas i akcijas</title><link>https://www.finansaipaprastai.lt/post/investavimas-i-akcijas</link><guid>https://www.finansaipaprastai.lt/post/investavimas-i-akcijas</guid><description></description><pubDate>Thu, 1 Jan 1970 00:00:00 GMT</pubDate></item></channel></rss>            """
+                .trimIndent()
+        assertThat(result).isEqualTo(expectNoWhiteSpace)
+    }
 }
