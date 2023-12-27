@@ -15,7 +15,9 @@ fun main(args: Array<String>) {
 //        .readLines()
 //    println(inputLines)
 
-    val urlSet = XML.Companion
+    val sitemapUrlSet = XML.Companion
         .decodeFromString(Sitemap.UrlSet.serializer(), inputFile.readText(Charsets.UTF_8))
-    println(urlSet)
+    println(sitemapUrlSet)
+
+    
 }

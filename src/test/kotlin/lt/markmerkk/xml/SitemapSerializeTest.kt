@@ -5,7 +5,7 @@ import lt.markmerkk.xml.sitemap.Sitemap
 import nl.adaptivity.xmlutil.serialization.XML
 import org.junit.jupiter.api.Test
 
-class Main1KtSerializeTest {
+class SitemapSerializeTest {
     @Test
     fun test1() {
         val customXml = Sitemap.UrlSet(
