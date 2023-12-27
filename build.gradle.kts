@@ -21,6 +21,9 @@ dependencies {
     implementation("io.github.pdvrieze.xmlutil:core-jvm:0.86.3")
     implementation("io.github.pdvrieze.xmlutil:serialization-jvm:0.86.3")
 
+    implementation("org.slf4j:slf4j-api:1.7.36")
+    implementation("ch.qos.logback:logback-classic:1.4.14")
+
     testImplementation(kotlin("test"))
     testImplementation("com.google.truth:truth:1.1.4")
 }

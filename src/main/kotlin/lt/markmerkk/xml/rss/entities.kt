@@ -2,7 +2,7 @@ package lt.markmerkk.xml.rss
 
 import kotlinx.serialization.Serializable
 import lt.markmerkk.DateTimeUtils
-import nl.adaptivity.xmlutil.serialization.XmlNamespaceDeclSpec
+import lt.markmerkk.xml.removeEmpty
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
 import java.net.URI
@@ -42,17 +42,12 @@ class Rss {
                 val pathSegments = uri
                     .path
                     .split("/")
-                    .rmEmpty()
+                    .removeEmpty()
                 val lastSegment = pathSegments
                     .lastOrNull() ?: throw IllegalArgumentException("Invalid link: $link")
                 val titleSanitized = lastSegment
                     .replace("-", " ")
                 return Title(titleSanitized)
-            }
-
-            private fun List<String>.rmEmpty(): List<String> {
-                return this
-                    .filter { it.isNotEmpty() }
             }
         }
     }

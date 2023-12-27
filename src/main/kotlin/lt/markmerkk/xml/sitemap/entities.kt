@@ -25,5 +25,9 @@ class Sitemap {
     @XmlSerialName("loc")
     data class Loc(
         @XmlValue val content: String,
-    )
+    ) {
+        fun contentSanitized(): String {
+            return content.trim()
+        }
+    }
 }

@@ -1,0 +1,21 @@
+<configuration debug="false" packagingData="false">
+    <property name="LOG_PATH" value="./logs"/>
+    <property name="LOG_PATH_ARCHIVE" value="${LOG_PATH}/archive"/>
+    <property name="HOME_LOG" value="${LOG_PATH}/app.log"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <logger name="lt.markmerkk" level="INFO" />
+    <logger name="lt.markmerkk.rss" level="DEBUG" />
+    <logger name="lt.markmerkk.sitemap" level="DEBUG" />
+</configuration>

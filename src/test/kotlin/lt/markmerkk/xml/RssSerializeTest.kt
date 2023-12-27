@@ -71,8 +71,8 @@ class RssSerializeTest {
 
         val expectNoWhiteSpace =
             """
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Title1</title><link>https://www.finansaipaprastai.lt/</link><description></description><pubDate>Thu, 1 Jan 1970 00:00:00 GMT</pubDate><item><title>investavimas i akcijas</title><link>https://www.finansaipaprastai.lt/post/investavimas-i-akcijas</link><guid>https://www.finansaipaprastai.lt/post/investavimas-i-akcijas</guid><description></description><pubDate>Thu, 1 Jan 1970 00:00:00 GMT</pubDate></item></channel></rss>            """
-                .trimIndent()
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Title1</title><link>https://www.finansaipaprastai.lt/</link><description></description><pubDate>Thu, 1 Jan 1970 00:00:00 GMT</pubDate><item><title>investavimas i akcijas</title><link>https://www.finansaipaprastai.lt/post/investavimas-i-akcijas</link><guid>https://www.finansaipaprastai.lt/post/investavimas-i-akcijas</guid><description></description><pubDate>Thu, 1 Jan 1970 00:00:00 GMT</pubDate></item></channel></rss>
+            """.trimIndent()
         assertThat(result).isEqualTo(expectNoWhiteSpace)
     }
 }
